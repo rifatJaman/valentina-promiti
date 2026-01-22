@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Per Promiti 💛</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</script>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #b11226, #ff4d6d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.card {
+    background: rgba(255,255,255,0.15);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+}
+button {
+    padding: 15px 30px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 30px;
+    margin: 10px;
+    cursor: pointer;
+}
+.yes {
+    background: #ff4d6d;
+    color: white;
+}
+.no {
+    background: white;
+    color: #ff4d6d;
+}
+#response {
+    display: none;
+    font-size: 1.5em;
+    margin-top: 30px;
+}
+
+.heart {
+    color: #FFD700;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.heart.beat {
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+    0%   { transform: scale(1); }
+    25%  { transform: scale(1.2); }
+    40%  { transform: scale(1); }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+</style>
+</head>
+
+<body>
+<div class="card">
+<h1><h1>Promiti <span class="heart">💛</span></h1></h1>
+
+<p>
+La mia dolce metà. Il mio sorriso. Con te ogni momento è bello.<br><br>
+Per questo oggi voglio chiederti una cosa importante…
+</p>
+
+<h2>Do you want to be my Valentine? 💘</h2>
+
+<button class="yes" onclick="sendEmail()">Sì 💖</button>
+
+<button class="no" onclick="moveButton(this)">Certo che sì 😍</button>
+
+<div id="response">💞 Ti amo 💞</div>
+</div>
+
+<audio id='music' autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
+
+<script>
+    (function(){
+    emailjs.init("1dEGXDj6NrJXEVjzx");
+})();
+function sendEmail() {
+    // recupero elementi
+    // khan.afiapromiti@gmail.com
+    const response = document.getElementById("response");
+    const music = document.getElementById("music");
+    const heart = document.getElementById("heart");
+
+    // 1. Mostra la risposta
+    response.style.display = "block";
+
+    // 2. Avvia la musica
+    music.play();
+
+    // 3. Cuore giallo che batte
+   
+
+    // 4. Invia email
+    emailjs.send("service_xdmz36b", "template_5t1gclc", {
+        from_name: "Promiti",
+        message: "SÌ, voglio essere la tua Valentina 💛",
+        date: new Date().toLocaleString()
+    })
+    .then(() => {
+        console.log("Email inviata correttamente 💛");
+    })
+    .catch((error) => {
+        console.error("Errore EmailJS:", error);
+    });
+}
+
+// bottone che scappa 😅
+function moveButton(btn) {
+    btn.style.position = "relative";
+    btn.style.left = Math.random() * 100 + "px";
+}
+</script>
+
+</body>
+</html>
